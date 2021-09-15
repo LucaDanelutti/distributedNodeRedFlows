@@ -1,0 +1,22 @@
+{
+  "name": "node-red-contrib-kafka-publish",
+  "version": "1.0.0",
+  "description": "",
+  "main": "kafka-publish",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "node-red": {
+    "nodes": {
+      "kafka-publish": "kafka-publish.js"
+    }
+  },
+  "devDependencies": {
+    "ip": "^1.1.5"
+  },
+  "dependencies": {
+    "kafkajs": "^1.15.0"
+  }
+}
