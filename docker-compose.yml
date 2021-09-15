@@ -1,0 +1,88 @@
+# temporary setup to test things out
+version: '2'
+services:
+  zookeeper-1:
+    container_name: zookeeper-1
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+
+  kafka-1:
+    container_name: kafka-1
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper-1
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  kafka-2:
+    container_name: kafka-2
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper-1
+    ports:
+      - 39092:39092
+    environment:
+      KAFKA_BROKER_ID: 2
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2:9092,PLAINTEXT_HOST://localhost:39092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui
+    container_name: kafka-ui
+    ports:
+      - "8080:8080"
+    restart: always
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=local
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka-1:9092
+      - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
+
+  node-red-1:
+    container_name: node-red-1
+    image: nodered/node-red:latest
+    environment:
+      - TZ=Europe/Rome
+    ports:
+      - "1881:1880"
+    volumes:
+      - node-red-data-1:/data
+
+  node-red-2:
+    container_name: node-red-2
+    image: nodered/node-red:latest
+    environment:
+      - TZ=Europe/Rome
+    ports:
+      - "1882:1880"
+    volumes:
+      - node-red-data-2:/data
+
+  node-red-3:
+    container_name: node-red-3
+    image: nodered/node-red:latest
+    environment:
+      - TZ=Europe/Rome
+    ports:
+      - "1883:1880"
+    volumes:
+      - node-red-data-3:/data
+
+volumes:
+  node-red-data-1:
+  node-red-data-2:
+  node-red-data-3:
+
