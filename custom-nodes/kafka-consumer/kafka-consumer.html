@@ -1,0 +1,45 @@
+<script type="text/javascript">
+  RED.nodes.registerType('kafka-consumer',{
+    category: 'Kafka',
+    color: '#a6bbcf',
+    defaults: {
+      name: {value:""},
+      initialBroker: {value:""},
+      clientId: {value: ""},
+      topic: {value: ""},  //TODO: implement consume from multiple topic
+      groupId: {value: ""}
+    },
+    inputs:0,
+    outputs:1,
+    label: function() {
+      return this.name||"kafka-consumer";
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="kafka-consumer">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+    <label for="node-input-initialBroker"><i class="fa fa-tag"></i> Initial Broker</label>
+    <input type="text" id="node-input-initialBroker">
+  </div>
+  <div class="form-row">
+    <label for="node-input-clientId"><i class="fa fa-tag"></i> Client ID</label>
+    <input type="text" id="node-input-clientId">
+  </div>
+  <div class="form-row">
+    <label for="node-input-topic"><i class="fa fa-tag"></i> Topic</label>
+    <input type="text" id="node-input-topic">
+  </div>
+  <div class="form-row">
+    <label for="node-input-groupId"><i class="fa fa-tag"></i> Group ID</label>
+    <input type="text" id="node-input-groupId">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="kafka-consumer">
+  <p>Node description here</p>
+</script>
