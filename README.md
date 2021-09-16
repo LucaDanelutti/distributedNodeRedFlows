@@ -16,3 +16,5 @@ The docker-compose file will start these containers:
 Node.JS is required to run the kafkaJS demos.
 
 In the folder custom-nodes the new Node-Red nodes will be developed.
+
+

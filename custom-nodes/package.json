@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "node-red": {
     "nodes": {
-      "kafka-consumer": "custom-nodes/kafka-consumer/kafka-consumer.js",
-      "kafka-producer": "custom-nodes/kafka-producer/kafka-producer.js"
+      "kafka-producer": "kafka-producer.js",
+      "kafka-consumer": "kafka-consumer.js"
     }
   },
   "dependencies": {

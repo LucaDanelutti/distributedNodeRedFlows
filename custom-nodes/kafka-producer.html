@@ -3,8 +3,8 @@
     category: 'Kafka',
     color: '#a6bbcf',
     defaults: {
-      name: {value:""},
-      initialBroker: {value:""},
+      name: {value: ""},
+      brokers: {value: ""},
       clientId: {value: ""},
       topic: {value: ""}  //TODO: produce to multiple topics
     },
@@ -22,8 +22,8 @@
     <input type="text" id="node-input-name" placeholder="Name">
   </div>
   <div class="form-row">
-    <label for="node-input-initialBroker"><i class="fa fa-tag"></i> Initial Broker</label>
-    <input type="text" id="node-input-initialBroker">
+    <label for="node-input-brokers"><i class="fa fa-tag"></i> Brokers</label>
+    <input id="node-input-brokers" type="text" >
   </div>
   <div class="form-row">
     <label for="node-input-clientId"><i class="fa fa-tag"></i> Client ID</label>
