@@ -1,0 +1,33 @@
+<script type="text/javascript">
+  RED.nodes.registerType('kafka-connection',{
+    category: 'config',
+    color: '#a6bbcf',
+    defaults: {
+      name: {value: "", required: false},
+      brokers: {value: [], required: true},
+      clientId: {value: ""},
+    },
+    label: function() {
+      return this.name||"kafka-connection";
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="kafka-connection">
+  <div class="form-row">
+    <label for="node-config-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-config-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-brokers"><i class="fa fa-tag"></i> Brokers</label>
+    <input id="node-config-input-brokers" type="text" placeholder="hostname1:port1,hostname2:port2">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-clientId"><i class="fa fa-tag"></i> Client ID</label>
+    <input type="text" id="node-config-input-clientId">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="kafka-connection">
+  <p>Node description here</p>
+</script>

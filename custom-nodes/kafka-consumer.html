@@ -4,8 +4,7 @@
     color: '#a6bbcf',
     defaults: {
       name: {value:""},
-      brokers: {value: ""},
-      clientId: {value: ""},
+      connection: {type: "kafka-connection"},
       topic: {value: ""},  //TODO: implement consume from multiple topic
       groupId: {value: ""}
     },
@@ -23,12 +22,8 @@
     <input type="text" id="node-input-name" placeholder="Name">
   </div>
   <div class="form-row">
-    <label for="node-input-brokers"><i class="fa fa-tag"></i> Brokers</label>
-    <input id="node-input-brokers" type="text">
-  </div>
-  <div class="form-row">
-    <label for="node-input-clientId"><i class="fa fa-tag"></i> Client ID</label>
-    <input type="text" id="node-input-clientId">
+    <label for="node-input-connection"><i class="fa fa-plug"></i> Connection</label>
+    <input id="node-input-connection" type="text">
   </div>
   <div class="form-row">
     <label for="node-input-topic"><i class="fa fa-tag"></i> Topic</label>

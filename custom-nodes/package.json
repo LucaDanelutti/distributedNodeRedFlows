@@ -4,7 +4,8 @@
   "node-red": {
     "nodes": {
       "kafka-producer": "kafka-producer.js",
-      "kafka-consumer": "kafka-consumer.js"
+      "kafka-consumer": "kafka-consumer.js",
+      "kafka-connection": "kafka-connection.js"
     }
   },
   "dependencies": {
