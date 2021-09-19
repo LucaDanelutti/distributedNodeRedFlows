@@ -1,11 +1,16 @@
+const {Kafka} = require("kafkajs");
 module.exports = function(RED) {
     function KafkaConnectionNode(config) {
         RED.nodes.createNode(this, config)
         let node = this;
-        let options = {}
-        options.brokers = config.brokers.replace(" ", "").split(",")
-        options.clientId = config.clientId
-        node.options = options
+        const kafka = new Kafka({
+            brokers: config.brokers.replace(" ", "").split(","),
+            clientId: config.clientId
+        })
+        node.getKafka = () => {
+            return kafka
+        }
+
     }
     RED.nodes.registerType("kafka-connection",KafkaConnectionNode)
 }
