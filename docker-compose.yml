@@ -73,15 +73,16 @@ services:
 
 
 
-#  node-red-1:
-#    container_name: node-red-1
-#    image: nodered/node-red:latest
-#    environment:
-#      - TZ=Europe/Rome
-#    ports:
-#      - "1881:1880"
-#    volumes:
-#      - node-red-data-1:/data
+  node-red-1:
+    container_name: node-red-1
+    build:
+      context: .
+    environment:
+      - TZ=Europe/Rome
+    ports:
+      - "1881:1880"
+    volumes:
+      - node-red-data-1:/data
 #
 #  node-red-2:
 #    container_name: node-red-2
@@ -103,8 +104,8 @@ services:
 #    volumes:
 #      - node-red-data-3:/data
 #
-#volumes:
-#  node-red-data-1:
+volumes:
+  node-red-data-1:
 #  node-red-data-2:
 #  node-red-data-3:
 
