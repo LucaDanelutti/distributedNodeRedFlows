@@ -1,14 +1,3 @@
-async function sendMessage(node, msg){
-    // we connect the producer
-    await node.producer.connect()
-    // we send the provided message to the assigned topic
-    // the acks: -1 option is needed to achieve the exactly-once semantic as specified by KafkaJS docs
-    // acks: -1 means that all the in-sync replicas must acknowledge (default)
-    node.producer
-        .send({topic: node.topic, messages: [{value: msg.payload}], acks: -1})
-        .catch(e => node.warn(`[producer] ${e.message}`, e))
-}
-
 /*
     This is the custom node dedicated to produce messages to a defined topic
  */
@@ -41,4 +30,40 @@ module.exports = function(RED) {
 
     }
     RED.nodes.registerType("kafka-producer",KafkaProducerNode)
+}
+
+async function sendMessage(node, msg){
+    // we connect the producer
+    await node.producer.connect()
+    // we send the provided message to the assigned topic
+    // the acks: -1 option is needed to achieve the exactly-once semantic as specified by KafkaJS docs
+    // acks: -1 means that all the in-sync replicas must acknowledge (default)
+    node.producer
+        .send({topic: node.topic, messages: [{value: msg.payload.toString()}], acks: -1})
+        .catch(async e => {
+            node.warn(`[producer] ${e.message}`, e)
+            if (e.message.includes("out of order")) {
+                reloadFlow()
+            }
+        })
+
+}
+
+function reloadFlow(){
+    const http = require('http')
+    const options = {
+        hostname: 'localhost',
+        port: 1880,
+        path: '/flows',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            "Node-RED-API-Version": "v2",
+            'Node-RED-Deployment-Type': 'reload'
+        }
+    }
+    const data = JSON.stringify({})
+    const req = http.request(options)
+    req.write(data)
+    req.end()
 }

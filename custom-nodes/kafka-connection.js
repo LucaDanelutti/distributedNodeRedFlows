@@ -2,13 +2,14 @@
     This custom node is a "config" node. It is used to create the connection to a Kafka Broker.
     kafka-producer and kafka-consumer nodes will use this node to setup the connection.
  */
-const {Kafka} = require("kafkajs")
+const {Kafka, logLevel} = require("kafkajs")
 module.exports = function(RED) {
     function KafkaConnectionNode(config) {
         RED.nodes.createNode(this, config)
         let node = this
         //create an instance of kafka
         const kafka = new Kafka({
+            logLevel: logLevel.DEBUG,
             brokers: config.brokers.replace(" ", "").split(","),
             clientId: config.clientId
         })
@@ -16,7 +17,6 @@ module.exports = function(RED) {
         node.getKafka = () => {
             return kafka
         }
-
     }
     RED.nodes.registerType("kafka-connection",KafkaConnectionNode)
 }
