@@ -1,19 +1,3 @@
-
-async function consume(node){
-    // we connect the consumer to the broker
-    await node.consumer.connect()
-    // we subscribe to the defined topic
-    await node.consumer.subscribe({topic: node.topic})
-    // we handle messages in a "per-message" fashion, as handling them in batches is out of the scope of the project
-    await node.consumer.run({
-        eachMessage: async ({ topic, partition, message }) => {
-            node.warn("[consumer] RECEIVED: #"+topic+"# "+message.value)
-            const msg = JSON.parse(message.value);
-            node.send(msg)
-        }
-    })
-}
-
 /*
     This node is the consumer node, it is used to pull messages from a kafka topic
  */
@@ -32,7 +16,10 @@ module.exports = function(RED) {
 
         //we start the async function to handle new incoming messages
         consume(node)
-            .catch(e => node.error("Consumer error",e.message))
+            .catch(e => {
+                node.error("Consumer error",e.message)
+                reloadFlow()
+            })
 
         // this is the function that will be called when the node is removed
         node.on('close', function (done) {
@@ -43,3 +30,38 @@ module.exports = function(RED) {
     }
     RED.nodes.registerType("kafka-consumer",KafkaConsumerNode)
 }
+
+function reloadFlow(){
+    const http = require('http')
+    const options = {
+        hostname: 'localhost',
+        port: 1880,
+        path: '/flows',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            "Node-RED-API-Version": "v2",
+            'Node-RED-Deployment-Type': 'reload'
+        }
+    }
+    const data = JSON.stringify({})
+    const req = http.request(options)
+    req.write(data)
+    req.end()
+}
+
+async function consume(node){
+    // we connect the consumer to the broker
+    await node.consumer.connect()
+    // we subscribe to the defined topic
+    await node.consumer.subscribe({topic: node.topic})
+    // we handle messages in a "per-message" fashion, as handling them in batches is out of the scope of the project
+    await node.consumer.run({
+        eachMessage: async ({ topic, partition, message }) => {
+            node.warn("[consumer] RECEIVED: #"+topic+"# "+message.value)
+            const msg = JSON.parse(message.value);
+            node.send(msg)
+        }
+    })
+}
+
