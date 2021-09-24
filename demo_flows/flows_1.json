@@ -1,0 +1,66 @@
+[
+    {
+        "id": "f8f47d69c6b47898",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "903927e59dbe1a57",
+        "type": "kafka-connection",
+        "name": "client_1",
+        "brokers": "kafka-1:9092",
+        "clientId": "1"
+    },
+    {
+        "id": "010ce67a1446331a",
+        "type": "inject",
+        "z": "f8f47d69c6b47898",
+        "name": "demo msg",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "test_1",
+                "v": "abc123",
+                "vt": "str"
+            },
+            {
+                "p": "test_2",
+                "v": "true",
+                "vt": "bool"
+            },
+            {
+                "p": "test_3",
+                "v": "42",
+                "vt": "num"
+            }
+        ],
+        "repeat": "4",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 100,
+        "wires": [
+            [
+                "ee1aee0e20c7a57b"
+            ]
+        ]
+    },
+    {
+        "id": "ee1aee0e20c7a57b",
+        "type": "kafka-producer",
+        "z": "f8f47d69c6b47898",
+        "name": "",
+        "connection": "903927e59dbe1a57",
+        "topic": "demo_topic",
+        "x": 180,
+        "y": 200,
+        "wires": []
+    }
+]

@@ -1,0 +1,44 @@
+[
+    {
+        "id": "6917cb6278c3bc9c",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "401dbb8c14ad2f0b",
+        "type": "kafka-connection",
+        "name": "client_3",
+        "brokers": "kafka-3:9092",
+        "clientId": "3"
+    },
+    {
+        "id": "35c2fafd1f427062",
+        "type": "kafka-consumer",
+        "z": "6917cb6278c3bc9c",
+        "name": "consume patatine",
+        "connection": "401dbb8c14ad2f0b",
+        "topic": "patatine",
+        "groupId": "group_patatine",
+        "x": 130,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "37bc7402d4a52ba1",
+        "type": "kafka-consumer",
+        "z": "6917cb6278c3bc9c",
+        "name": "consume panini",
+        "connection": "401dbb8c14ad2f0b",
+        "topic": "panini",
+        "groupId": "group_panini",
+        "x": 120,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    }
+]

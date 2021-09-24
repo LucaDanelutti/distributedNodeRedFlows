@@ -1,0 +1,93 @@
+[
+    {
+        "id": "5e1a98b4b67be95e",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "b3f812011f394f41",
+        "type": "kafka-connection",
+        "name": "client_2",
+        "brokers": "kafka-2:9092",
+        "clientId": "2"
+    },
+    {
+        "id": "34d3d3ea62386dc3",
+        "type": "kafka-consumer",
+        "z": "5e1a98b4b67be95e",
+        "name": "",
+        "connection": "b3f812011f394f41",
+        "topic": "demo_topic",
+        "groupId": "demo_group_1",
+        "x": 140,
+        "y": 100,
+        "wires": [
+            [
+                "cb71a19e9b39311c",
+                "472b04e41cf12630"
+            ]
+        ]
+    },
+    {
+        "id": "70b4fc842ae28a05",
+        "type": "kafka-producer",
+        "z": "5e1a98b4b67be95e",
+        "name": "producer panini",
+        "connection": "b3f812011f394f41",
+        "topic": "panini",
+        "x": 160,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "6491985658654685",
+        "type": "kafka-producer",
+        "z": "5e1a98b4b67be95e",
+        "name": "producer patatine",
+        "connection": "b3f812011f394f41",
+        "topic": "patatine",
+        "x": 430,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "cb71a19e9b39311c",
+        "type": "function",
+        "z": "5e1a98b4b67be95e",
+        "name": "test_2 = patatine",
+        "func": "msg.test_2=\"patatine\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 100,
+        "wires": [
+            [
+                "6491985658654685"
+            ]
+        ]
+    },
+    {
+        "id": "472b04e41cf12630",
+        "type": "function",
+        "z": "5e1a98b4b67be95e",
+        "name": "test_2 = panini",
+        "func": "msg.test_2=\"panini\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 160,
+        "y": 180,
+        "wires": [
+            [
+                "70b4fc842ae28a05"
+            ]
+        ]
+    }
+]

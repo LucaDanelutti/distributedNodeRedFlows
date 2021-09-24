@@ -16,12 +16,22 @@ module.exports = function(RED) {
         node.producer = connection.getKafka().producer({idempotent: true})
 
         // we connect the producer
-        connect(node).then(r => node.warn("[producer] connected"))
+        connect(node).then(() => node.warn("[producer] connected"))
 
         // this is the function that will be called each time the node receives a message from another node
         node.on('input', function (msg) {
-            sendMessage(node, msg)
-                .then(() => node.warn("[producer] SENT: #" + node.topic + "# " + msg.payload))
+            // we send the provided message to the assigned topic
+            // the acks: -1 option is needed to achieve the exactly-once semantic as specified by KafkaJS docs
+            // acks: -1 means that all the in-sync replicas must acknowledge (default)
+            node.producer
+                .send({topic: node.topic, messages: [{value: JSON.stringify(msg)}], acks: -1})
+                .catch(async e => {
+                    node.warn(`[producer] ${e.message}`, e)
+                    if (e.message.includes("out of order")) {
+                        reloadFlow()
+                    }
+                })
+                .then(()=> node.warn("[producer]: #"+node.topic+"# "+JSON.stringify(msg)))
         })
 
         // this is the function that will be called once we remove the node
@@ -35,19 +45,6 @@ module.exports = function(RED) {
     RED.nodes.registerType("kafka-producer",KafkaProducerNode)
 }
 
-async function sendMessage(node, msg){
-    // we send the provided message to the assigned topic
-    // the acks: -1 option is needed to achieve the exactly-once semantic as specified by KafkaJS docs
-    // acks: -1 means that all the in-sync replicas must acknowledge (default)
-    node.producer
-        .send({topic: node.topic, messages: [{value: JSON.stringify(msg)}], acks: -1})
-        .catch(async e => {
-            node.warn(`[producer] ${e.message}`, e)
-            if (e.message.includes("out of order")) {
-                reloadFlow()
-            }
-        })
-}
 
 async function connect(node){
     await node.producer.connect()
