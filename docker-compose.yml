@@ -73,6 +73,12 @@ services:
     container_name: node-red-1
     build:
       context: .
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+      - zookeeper
+      - kafka-ui
     environment:
       - TZ=Europe/Rome
       - FLOWS= /demo_flows/flows_1.json
@@ -85,6 +91,12 @@ services:
     container_name: node-red-2
     build:
       context: .
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+      - zookeeper
+      - kafka-ui
     environment:
       - TZ=Europe/Rome
       - FLOWS= /demo_flows/flows_2.json
@@ -97,6 +109,12 @@ services:
     container_name: node-red-3
     build:
       context: .
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+      - zookeeper
+      - kafka-ui
     environment:
       - TZ=Europe/Rome
       - FLOWS= /demo_flows/flows_3.json
