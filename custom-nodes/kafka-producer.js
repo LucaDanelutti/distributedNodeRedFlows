@@ -6,7 +6,7 @@ module.exports = function(RED) {
         RED.nodes.createNode(this, config)
         // we get the kafka-connection node
         let connection = RED.nodes.getNode(config.connection)
-        if(!connection)
+        if (!connection)
             return
         let node = this
         node.topic = config.topic
@@ -15,17 +15,20 @@ module.exports = function(RED) {
         // to achieve the exactly-once semantic of Kafka
         node.producer = connection.getKafka().producer({idempotent: true})
 
+        // we connect the producer
+        connect(node).then(r => node.warn("[producer] connected"))
+
         // this is the function that will be called each time the node receives a message from another node
-        node.on('input', function(msg) {
+        node.on('input', function (msg) {
             sendMessage(node, msg)
-                .then(() => node.warn("[producer] SENT: #"+node.topic+"# "+msg.payload) )
+                .then(() => node.warn("[producer] SENT: #" + node.topic + "# " + msg.payload))
         })
 
         // this is the function that will be called once we remove the node
         node.on('close', function (done) {
             node.producer.disconnect()
                 .then(done())
-                .catch(e => node.error("producer error",e.message))
+                .catch(e => node.error("producer error", e.message))
         })
 
     }
@@ -33,22 +36,22 @@ module.exports = function(RED) {
 }
 
 async function sendMessage(node, msg){
-    // we connect the producer
-    await node.producer.connect()
     // we send the provided message to the assigned topic
     // the acks: -1 option is needed to achieve the exactly-once semantic as specified by KafkaJS docs
     // acks: -1 means that all the in-sync replicas must acknowledge (default)
     node.producer
-        .send({topic: node.topic, messages: [{value: msg.payload.toString()}], acks: -1})
+        .send({topic: node.topic, messages: [{value: JSON.stringify(msg)}], acks: -1})
         .catch(async e => {
             node.warn(`[producer] ${e.message}`, e)
             if (e.message.includes("out of order")) {
                 reloadFlow()
             }
         })
-
 }
 
+async function connect(node){
+    await node.producer.connect()
+}
 function reloadFlow(){
     const http = require('http')
     const options = {

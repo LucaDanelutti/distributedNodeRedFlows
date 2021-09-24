@@ -9,7 +9,6 @@ module.exports = function(RED) {
         let node = this
         //create an instance of kafka
         const kafka = new Kafka({
-            logLevel: logLevel.DEBUG,
             brokers: config.brokers.replace(" ", "").split(","),
             clientId: config.clientId
         })

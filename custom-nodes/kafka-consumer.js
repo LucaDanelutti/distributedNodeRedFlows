@@ -8,7 +8,7 @@ async function consume(node){
     await node.consumer.run({
         eachMessage: async ({ topic, partition, message }) => {
             node.warn("[consumer] RECEIVED: #"+topic+"# "+message.value)
-            const msg = {payload: message.value};
+            const msg = JSON.parse(message.value);
             node.send(msg)
         }
     })
