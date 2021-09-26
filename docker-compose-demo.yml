@@ -85,6 +85,7 @@ services:
       - kafka-ui
     environment:
       - TZ=Europe/Rome
+      - FLOWS=/demo_flows/flows_1.json
     ports:
       - "1881:1880"
     volumes:
@@ -102,6 +103,7 @@ services:
       - kafka-ui
     environment:
       - TZ=Europe/Rome
+      - FLOWS=/demo_flows/flows_2.json
     ports:
       - "1882:1880"
     volumes:
@@ -119,6 +121,7 @@ services:
       - kafka-ui
     environment:
       - TZ=Europe/Rome
+      - FLOWS=/demo_flows/flows_3.json
     ports:
       - "1883:1880"
     volumes:
