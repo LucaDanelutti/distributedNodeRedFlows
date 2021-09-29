@@ -1,0 +1,72 @@
+[
+    {
+        "id": "e2af5d6993b96043",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "5406ae528525208c",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "tcp://mi.remote.lucadanelutti.it:1883",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "c031786cf321ab35",
+        "type": "kafka-connection",
+        "name": "client_7",
+        "brokers": "kafka-2:9092",
+        "clientId": "7"
+    },
+    {
+        "id": "76e88edbb10cbd6e",
+        "type": "mqtt in",
+        "z": "e2af5d6993b96043",
+        "name": "",
+        "topic": "notification",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "5406ae528525208c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "5d09f0b596ffdc17"
+            ]
+        ]
+    },
+    {
+        "id": "5d09f0b596ffdc17",
+        "type": "kafka-producer",
+        "z": "e2af5d6993b96043",
+        "name": "produce notifications",
+        "connection": "c031786cf321ab35",
+        "topic": "notification",
+        "x": 180,
+        "y": 160,
+        "wires": []
+    }
+]

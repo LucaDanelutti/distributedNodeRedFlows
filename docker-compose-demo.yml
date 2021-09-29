@@ -39,7 +39,6 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
       KAFKA_DEFAULT_REPLICATION_FACTOR: 2
 
-
   kafka-3:
     container_name: kafka-3
     image: confluentinc/cp-kafka:latest
@@ -54,7 +53,6 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONNECTIONS_FROM_HOST:PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
       KAFKA_DEFAULT_REPLICATION_FACTOR: 2
-
 
   kafka-ui:
     image: provectuslabs/kafka-ui
@@ -71,7 +69,6 @@ services:
       - KAFKA_CLUSTERS_0_NAME=local
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka-3:9092
       - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
-
 
   node-red-1:
     container_name: node-red-1
@@ -102,6 +99,7 @@ services:
       - zookeeper
       - kafka-ui
     environment:
+      - NODE_RED_CREDENTIAL_SECRET="demo"
       - TZ=Europe/Rome
       - FLOWS=/data/demo_flows/flows_2.json
     ports:
@@ -127,8 +125,84 @@ services:
     volumes:
       - node-red-data-3:/data
 
+  node-red-4:
+    container_name: node-red-4
+    build:
+      context: .
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+      - zookeeper
+      - kafka-ui
+    environment:
+      - TZ=Europe/Rome
+      - FLOWS=/data/demo_flows/flows_4.json
+    ports:
+      - "1884:1880"
+    volumes:
+      - node-red-data-4:/data
+
+  node-red-5:
+    container_name: node-red-5
+    build:
+      context: .
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+      - zookeeper
+      - kafka-ui
+    environment:
+      - TZ=Europe/Rome
+      - FLOWS=/data/demo_flows/flows_5.json
+    ports:
+      - "1885:1880"
+    volumes:
+      - node-red-data-5:/data
+
+  node-red-6:
+    container_name: node-red-6
+    build:
+      context: .
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+      - zookeeper
+      - kafka-ui
+    environment:
+      - TZ=Europe/Rome
+      - FLOWS=/data/demo_flows/flows_6.json
+    ports:
+      - "1886:1880"
+    volumes:
+      - node-red-data-6:/data
+
+  node-red-7:
+    container_name: node-red-7
+    build:
+      context: .
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+      - zookeeper
+      - kafka-ui
+    environment:
+      - TZ=Europe/Rome
+      - FLOWS=/data/demo_flows/flows_7.json
+    ports:
+      - "1887:1880"
+    volumes:
+      - node-red-data-7:/data
+
 volumes:
   node-red-data-1:
   node-red-data-2:
   node-red-data-3:
+  node-red-data-4:
+  node-red-data-5:
+  node-red-data-6:
+  node-red-data-7:
 

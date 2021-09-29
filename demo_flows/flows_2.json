@@ -2,7 +2,7 @@
     {
         "id": "5e1a98b4b67be95e",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "split_telegram_msgs",
         "disabled": false,
         "info": ""
     },
@@ -14,80 +14,93 @@
         "clientId": "2"
     },
     {
-        "id": "34d3d3ea62386dc3",
+        "id": "cce6a437490c79ae",
         "type": "kafka-consumer",
         "z": "5e1a98b4b67be95e",
+        "name": "consume telegram msgs",
+        "connection": "b3f812011f394f41",
+        "topic": "telegram_msg",
+        "groupId": "telegram_group",
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "27c7be7c769afc49"
+            ]
+        ]
+    },
+    {
+        "id": "27c7be7c769afc49",
+        "type": "switch",
+        "z": "5e1a98b4b67be95e",
         "name": "",
-        "connection": "b3f812011f394f41",
-        "topic": "demo_topic",
-        "groupId": "demo_group_1",
-        "x": 140,
-        "y": 100,
+        "property": "payload.content",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "2",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "3",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 450,
+        "y": 120,
         "wires": [
             [
-                "cb71a19e9b39311c",
-                "472b04e41cf12630"
+                "8781a950785a85d2"
+            ],
+            [
+                "091e3e47c6655c8b"
+            ],
+            [
+                "6de0edce030ce920"
             ]
         ]
     },
     {
-        "id": "70b4fc842ae28a05",
+        "id": "8781a950785a85d2",
         "type": "kafka-producer",
         "z": "5e1a98b4b67be95e",
-        "name": "producer panini",
+        "name": "producer led_1",
         "connection": "b3f812011f394f41",
-        "topic": "panini",
-        "x": 160,
-        "y": 240,
+        "topic": "led_1",
+        "x": 640,
+        "y": 60,
         "wires": []
     },
     {
-        "id": "6491985658654685",
+        "id": "6de0edce030ce920",
         "type": "kafka-producer",
         "z": "5e1a98b4b67be95e",
-        "name": "producer patatine",
+        "name": "producer led_3",
         "connection": "b3f812011f394f41",
-        "topic": "patatine",
-        "x": 430,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "cb71a19e9b39311c",
-        "type": "function",
-        "z": "5e1a98b4b67be95e",
-        "name": "test_2 = patatine",
-        "func": "msg.test_2=\"patatine\"\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 420,
-        "y": 100,
-        "wires": [
-            [
-                "6491985658654685"
-            ]
-        ]
-    },
-    {
-        "id": "472b04e41cf12630",
-        "type": "function",
-        "z": "5e1a98b4b67be95e",
-        "name": "test_2 = panini",
-        "func": "msg.test_2=\"panini\"\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 160,
+        "topic": "led_3",
+        "x": 640,
         "y": 180,
-        "wires": [
-            [
-                "70b4fc842ae28a05"
-            ]
-        ]
+        "wires": []
+    },
+    {
+        "id": "091e3e47c6655c8b",
+        "type": "kafka-producer",
+        "z": "5e1a98b4b67be95e",
+        "name": "producer led_2",
+        "connection": "b3f812011f394f41",
+        "topic": "led_2",
+        "x": 640,
+        "y": 120,
+        "wires": []
     }
 ]

@@ -2,7 +2,7 @@
     {
         "id": "f8f47d69c6b47898",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "rcv_telegram_msgs",
         "disabled": false,
         "info": ""
     },
@@ -14,53 +14,55 @@
         "clientId": "1"
     },
     {
-        "id": "010ce67a1446331a",
-        "type": "inject",
+        "id": "f4024bdb60656f1d",
+        "type": "telegram bot",
+        "botname": "mtds_bot",
+        "usernames": "ianofgod, LucaDanelutti",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "100",
+        "usesocks": false,
+        "sockshost": "",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "9cd47dd4f9d636c1",
+        "type": "telegram receiver",
         "z": "f8f47d69c6b47898",
-        "name": "demo msg",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "test_1",
-                "v": "abc123",
-                "vt": "str"
-            },
-            {
-                "p": "test_2",
-                "v": "true",
-                "vt": "bool"
-            },
-            {
-                "p": "test_3",
-                "v": "42",
-                "vt": "num"
-            }
-        ],
-        "repeat": "4",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payloadType": "date",
-        "x": 180,
+        "name": "",
+        "bot": "f4024bdb60656f1d",
+        "saveDataDir": "",
+        "filterCommands": false,
+        "x": 150,
         "y": 100,
         "wires": [
             [
-                "ee1aee0e20c7a57b"
-            ]
+                "aa98557d0078ff04"
+            ],
+            []
         ]
     },
     {
-        "id": "ee1aee0e20c7a57b",
+        "id": "aa98557d0078ff04",
         "type": "kafka-producer",
         "z": "f8f47d69c6b47898",
         "name": "",
         "connection": "903927e59dbe1a57",
-        "topic": "demo_topic",
-        "x": 180,
-        "y": 200,
+        "topic": "telegram_msg",
+        "x": 140,
+        "y": 180,
         "wires": []
     }
 ]

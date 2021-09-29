@@ -1,0 +1,89 @@
+[
+    {
+        "id": "94252a1845b8c9e9",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "45f3255e97319e49",
+        "type": "kafka-consumer",
+        "z": "94252a1845b8c9e9",
+        "name": "consume notifications",
+        "connection": "1f9a635bd6cca317",
+        "topic": "notification",
+        "groupId": "notification_group",
+        "x": 150,
+        "y": 180,
+        "wires": [
+            [
+                "176f1e9846195395"
+            ]
+        ]
+    },
+    {
+        "id": "70e74cca5924fd1c",
+        "type": "telegram sender",
+        "z": "94252a1845b8c9e9",
+        "name": "",
+        "bot": "d5afe2ce64e45b28",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 150,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "176f1e9846195395",
+        "type": "function",
+        "z": "94252a1845b8c9e9",
+        "name": "create msg",
+        "func": "old = msg.payload;\nmsg.payload = {};\nmsg.payload.chatId = [437696097,448063506];\nmsg.payload.type = \"message\";\nmsg.payload.content = \"DONE: \"+old;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 150,
+        "y": 240,
+        "wires": [
+            [
+                "70e74cca5924fd1c"
+            ]
+        ]
+    },
+    {
+        "id": "1f9a635bd6cca317",
+        "type": "kafka-connection",
+        "name": "client_6",
+        "brokers": "kafka-1:9092",
+        "clientId": "6"
+    },
+    {
+        "id": "d5afe2ce64e45b28",
+        "type": "telegram bot",
+        "botname": "mtds_rep_bot",
+        "usernames": "ianofgod, LucaDanelutti",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "100",
+        "usesocks": false,
+        "sockshost": "",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    }
+]
