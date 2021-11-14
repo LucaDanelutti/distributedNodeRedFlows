@@ -56,8 +56,8 @@ folder matching the token of your personal Telegram bots ([more info](https://co
 ---
 ## Folder structure
 - `creds` 
-  - Credentials needed by the node-red installations to modify a pre-loaded
-  flow 
+  - Credentials needed by the node-red installations to access the Telegram bot
+  and the MQTT broker
 - `custom-nodes` 
   - Folder containing the custom node-red nodes
 - `report` 
