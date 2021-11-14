@@ -44,8 +44,8 @@ responsible for forwarding the messages to the proper nodes.
 ### How to run the demo
 1. Change the value `token` inside of all the  .json files in the `creds`
 folder matching the token of your personal Telegram bots ([more info](https://core.telegram.org/bots)).
-   1. Please note that you need to create two different bots one for sending and one for receiving
-   the outputs (this is a limitation imposed by the Telegram API on the
+   1. Please note that you need to create two different bots, one for sending and one for receiving
+   the outputs (this is a limitation imposed by the Telegram API on
    concurrent accesses)
    2. The tokens are all equal except for the ones of `flows_6_cred.json`, here put the token
    of the bot responsible for the replies. 
@@ -54,22 +54,7 @@ folder matching the token of your personal Telegram bots ([more info](https://co
    1. Example: `3 on`
 4. To access the different components of the project:
    1. Node-RED nodes: `localhost:[1881 -> 1887]`
-   2. Kafka-UI: `localhost:8080` useful to investigate the behaviour of Kafka 
-
-Kafka brokers:
-kafka-1:9092 (ext. 19092)
-kafka-2:9092 (ext. 29092)
-kafka-1:9092 (ext. 39092)
-Zookeeper server:
-zookeeper-1:2181 (ext. 22181)
-Kafka-ui (available at localhost:8080)
-Node-Red instances:
-node-red-1:1880 (ext. 1881)
-node-red-2:1880 (ext. 1882)
-node-red-3:1880 (ext. 1883)
-Node.JS is required to run the kafkaJS demos.
-
-In the folder custom-nodes the new Node-Red nodes will be developed.
+   2. Kafka-UI: `localhost:8080` useful to investigate the behaviour of Kafka
 
 ---
 ## Folder structure
