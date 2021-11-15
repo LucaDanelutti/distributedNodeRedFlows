@@ -1,9 +1,9 @@
 {
     "f4024bdb60656f1d": {
-        "token": "2042828714:AAFmv-igTZzG6XNb6ceYd1WO2ZwavCXUPxI"
+        "token": "<your-bot-token-1>"
     },
     "fe3ec81ca6f27939": {
-        "user": "node-red",
-        "password": "dottorato"
+        "user": "your-broker-username",
+        "password": "your-broker-password"
     }
 }

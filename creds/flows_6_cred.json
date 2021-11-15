@@ -1,9 +1,9 @@
 {
     "d5afe2ce64e45b28": {
-        "token": "2042786037:AAGVFW0qdjgxmhKgEPKRgi2QliQoWoViFh0"
+        "token": "<your-bot-token-2>"
     },
     "d55073911c591d52": {
-        "user": "node-red",
-        "password": "dottorato"
+        "user": "your-broker-username",
+        "password": "your-broker-password"
     }
 }
