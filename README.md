@@ -49,10 +49,12 @@ folder matching the token of your personal Telegram bots ([more info](https://co
    concurrent accesses)
    2. The tokens are all equal except for the ones of `flows_6_cred.json`, here put the token
    of the bot responsible for the replies. 
-2. Run the demo by typing `docker-compose -f ./docker-compose-demo-yml up -d`
-3. Send `#num off/on` in your telegram bot to trigger the change in the ESP-32 setup (`#num` must be a number ranging from 1 to 3)
+2. Configure the connection to the MQTT broker by changing the values `user` and `password` inside the .json files
+in the `creds` folder. Also change the values of `broker` and `port` in `flows_[3/4/5/7].json` inside of the `demo_flows` folder.
+3. Run the demo by typing `docker-compose -f ./docker-compose-demo.yml up -d`
+4. Send `#num off/on` in your telegram bot to trigger the change in the ESP-32 setup (`#num` must be a number ranging from 1 to 3)
    1. Example: `3 on`
-4. To access the different components of the project:
+5. To access the different components of the project:
    1. Node-RED nodes: `localhost:[1881 -> 1887]`
    2. Kafka-UI: `localhost:8080` useful to investigate the behaviour of Kafka
 
