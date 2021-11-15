@@ -3,6 +3,8 @@
 ---
 ## Assignment
 ![alt text](./report/images/before_after.PNG)
+This project was developed during the course of Middleware Technologies for Distributed Systems at PoliMi (2020/2021)
+and received the maximum grade. 
 > You are to implement an architecture that allows Node-red flows to span multiple devices.
 Normally, a Node-red flow executes locally to the machine where it is installed.
 Instead, consider multiple Node-red installations that:\
