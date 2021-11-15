@@ -3,7 +3,7 @@
 ---
 ## Assignment
 ![alt text](./report/images/before_after.PNG)
-This project was developed during the course of Middleware Technologies for Distributed Systems at PoliMi (2020/2021)
+This project was developed during the course of [Middleware Technologies for Distributed Systems at PoliMi](https://www11.ceda.polimi.it/schedaincarico/schedaincarico/controller/scheda_pubblica/SchedaPublic.do?&evn_default=evento&c_classe=743721&__pj0=0&__pj1=e23728bb4735457dfd2d5db09f370ef1) (2020/2021)
 and received the maximum grade. 
 > You are to implement an architecture that allows Node-red flows to span multiple devices.
 Normally, a Node-red flow executes locally to the machine where it is installed.
@@ -17,7 +17,7 @@ some other form of machine-level identifier.
 ---
 ## Structure and more info
 A report with all the specs and design choices made in the project
-can be found at `./report/report.pdf`.
+can be found at [`./report/report.pdf`](./report/report.pdf).
 
 ![alt text](./report/images/docker.PNG)
 
@@ -31,9 +31,9 @@ The initial flow is defined as follows:
 ![alt text](./report/images/demo_before.PNG)
 
 It is composed of a Telegram bot that listens for new messages
-(using the pre-built node of Telegram) and act upon newly received
-messages by turning ON/OFF the appropriate led of ESP-32 modules.\
-This is achieved by publishing messages into an MQTT topic where
+(using the [pre-built node of Telegram](https://flows.nodered.org/node/node-red-contrib-telegrambot)) and act upon newly received
+messages by turning ON/OFF the appropriate led of [ESP-32 modules](https://en.wikipedia.org/wiki/ESP32). \
+This is achieved by publishing messages into an [MQTT topic](https://cookbook.nodered.org/#mqtt) where
 the ESP-32 are registered. 
 
 ![alt text](./report/images/flow_divided.PNG)
