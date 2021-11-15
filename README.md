@@ -48,15 +48,15 @@ responsible for forwarding the messages to the proper nodes.
 folder matching the token of your personal Telegram bots ([more info](https://core.telegram.org/bots)).
    1. Please note that you need to create two different bots, one for sending and one for receiving
    the outputs (this is a limitation imposed by the Telegram API on
-   concurrent accesses)
+   concurrent accesses).
    2. The tokens are all equal except for the ones of `flows_6_cred.json`, here put the token
    of the bot responsible for the replies. 
-2. Configure the connection to the MQTT broker by changing the values `user` and `password` inside the .json files
-in the `creds` folder. Also change the values of `broker` and `port` in `flows_[3/4/5/7].json` inside of the `demo_flows` folder.
-3. Run the demo by typing `docker-compose -f ./docker-compose-demo.yml up -d`
-4. Send `#num off/on` in your telegram bot to trigger the change in the ESP-32 setup (`#num` must be a number ranging from 1 to 3)
+2. Configure the connection to the MQTT broker by changing the values `user` and `password` inside the .json files in the `creds` folder. Change the values of `broker` and `port` in `flows_[3/4/5/7].json` inside of the `demo_flows` folder. Inside flows_6.json at line 44 change the chatId ([how to get it](https://core.telegram.org/bots/api#getting-updates)) with the one of the chat in which you want to receive the replies.
+3. Open the iot-device/code.ino with Arduino IDE and change the Wi-Fi and MQTT settings. Compile it and upload it to an esp8266/eps-32 (or similar devices). Optionally, connect three leds to the GPIO pins specified in the source code.
+4. Run the demo by typing `docker-compose -f ./docker-compose-demo.yml up -d`
+5. Send `#num off/on` in your telegram bot to trigger the change in the ESP-32 setup (`#num` must be a number ranging from 1 to 3)
    1. Example: `3 on`
-5. To access the different components of the project:
+6. To access the different components of the project:
    1. Node-RED nodes: `localhost:[1881 -> 1887]`
    2. Kafka-UI: `localhost:8080` useful to investigate the behaviour of Kafka
 
@@ -67,10 +67,16 @@ in the `creds` folder. Also change the values of `broker` and `port` in `flows_[
   and the MQTT broker
 - `custom-nodes` 
   - Folder containing the custom node-red nodes
+- `demo_flows`
+  - Folder containing the source code of the Node-red nodes of the demo
+- `iot-device`
+  - Folder containing the source code of the iot device implemented to run the demo
 - `report` 
   - Folder containing report files
 - `docker-compose.yml` 
+  - Deploys a working environment with 3 kafka brokers and 3 Node-red empty istances 
 - `docker-compose-demo.yml`
+  - Deploys a working environment with 3 kafka brokers and 7 Node-red istances with our demo inside
 - `Dockerfile` 
-  - Builds a custom node-red image with the plugins pre-installed
+  - Builds a custom node-red image with the required plugins pre-installed
 ---
